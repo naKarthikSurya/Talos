@@ -1,0 +1,25 @@
+{
+  "name": "ai-agents-squad",
+  "version": "1.0.0",
+  "description": "Scaffold a structured AI engineering squad workflow.",
+  "main": "index.js",
+  "bin": {
+    "antigravity-squad": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github-personal:naKarthikSurya/ai-agents-squad.git"
+  },
+  "keywords": [
+    "antigravity",
+    "ai",
+    "agents",
+    "workflow",
+    "squad"
+  ],
+  "author": "",
+  "license": "ISC"
+}
