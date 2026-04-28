@@ -1,92 +1,209 @@
 # Antigravity AI Agents Squad
 
-A structured, deterministic AI engineering squad for your project. This package scaffolds a multi-agent workflow using the finite-state machine pattern, enforcing rigorous engineering guardrails and multi-step artifact verification.
+A stack-aware, deterministic, production-grade AI engineering squad. Scaffolds a complete
+multi-agent workflow system into any project with `npx antigravity-squad init`.
 
-## 🚀 Features
+## Features
 
-- **Role-Based Skills**: Specialized skills for Product Manager, Architect, Developer, and Tech Lead.
-- **Deterministic Workflows**: Multi-stage workflows that move from requirements to design to implementation.
-- **Shared State (Blackboard)**: Observability via `ai-control/state.md` to track the current stage and active agent.
-- **Safety Gates**: Built-in rules for backend architecture and safety verification.
-- **Git Exclusion**: Automatically adds generated folders to `.git/info/exclude` to keep them local-only.
+- **Stack-specific architect + developer skills** for NestJS, FastAPI, React, Next.js, Angular.
+- **Cross-cutting governance skills**: PM, state manager, testing strategist, security reviewer, API contract reviewer.
+- **Numbered, enforceable rules**: cross-stack baselines (00–04) + stack-specific architecture rules (10–22).
+- **Deterministic workflows**: triage → architecture → tests → security → planning → gate → execution.
+- **Canonical machine-readable state**: `ai-control/state.json` + human-readable `state.md` mirror.
+- **Execution gate**: hard stop before code changes — all approvals and quality gates must pass.
+- **Fullstack coordination**: shared contract-first workflows for NestJS+React and FastAPI+Next.js.
+- **Git exclusion**: `.agents/` and `ai-control/` excluded from project history automatically.
 
-## 📦 Installation (Private Git Repo)
+## Installation
 
-Since this is a private toolkit, you can install it directly from your private Git repository without needing a paid NPM account.
+```bash
+# Install from private repo
+npm install git+ssh://git@github.com:naKarthikSurya/ai-agents-squad.git
 
-1. **Add to your project**:
+# Initialize the squad in your project
+npx antigravity-squad init
+```
 
-    ```bash
-    npm install git+ssh://git@github.com:naKarthikSurya/ai-agents-squad.git
-    ```
-
-2. **Initialize the squad**:
-
-    ```bash
-    npx antigravity-squad init
-    ```
-
-### 🕵️ Hidden Installation (Local Only)
-
-If you want to use the squad in a project without adding it to the project's `package.json` (keeping the production manifest clean), use the `--no-save` flag:
+### Hidden install (no package.json entry)
 
 ```bash
 npm install git+ssh://github-personal:naKarthikSurya/ai-agents-squad.git --no-save
 ```
 
-### 🗑️ Removal
+### Removal
 
-To remove the squad from your local environment:
+```bash
+npm uninstall ai-agents-squad --no-save
+rm -rf .agents ai-control
+```
 
-1. **Uninstall the package**:
+## How to Start a Task
 
-   ```bash
-   npm uninstall ai-agents-squad --no-save
-   ```
+1. Describe your task to Claude.
+2. Claude runs workflow `00-triage-and-route.md` — classifies the task and initializes `state.json`.
+3. The correct stack workflow starts (e.g., `10-backend-nestjs-feature.md`).
+4. Each phase runs its designated skill, writes an artifact, and stops for your review.
+5. You approve or send back. No code is written until the execution gate clears.
 
-   *(Note: A plain `npm install` in the host project will also remove it if it wasn't saved.)*
+## Workflow Stages (Standard Feature)
 
-2. **Clean up folders** (Optional):
+```text
+TASK_TRIAGE_PENDING
+  → PM_ANALYSIS_PENDING          (product-manager-core → feature.md)
+  → USER_REVIEW_FEATURE_PENDING  [USER APPROVAL GATE]
+  → ARCHITECT_DESIGN_PENDING     (stack-architect → solution.md)
+  → USER_REVIEW_DESIGN_PENDING   [USER APPROVAL GATE]
+  → CONTRACT_REVIEW_PENDING      (api-contract-reviewer → backend/frontend_contract.md)
+  → TEST_STRATEGY_PENDING        (testing-strategist → test_strategy.md)
+  → SECURITY_REVIEW_PENDING      (security-reviewer → security_review.md)
+  → DEV_PLANNING_PENDING         (stack-developer → implementation_steps.md)
+  → PM_VERIFICATION_PENDING      (product-manager-core → pm_review.md)
+  → TECH_LEAD_REVIEW_PENDING     → tech_lead_review.md
+  → USER_APPROVAL_PENDING        [USER APPROVAL GATE]
+  → EXECUTION_PENDING            (90-execution-gate.md passes all checks)
+  → COMPLETED
+```
 
-   ```bash
-   rm -rf .agents ai-control
-   ```
+## Skills
 
-## 🛠️ Included Roles
+### Cross-Cutting Skills (All Stacks)
 
-### 📋 Product Manager (PM)
+| Skill | Purpose | Writes |
+| --- | --- | --- |
+| `product-manager-core` | Requirements, acceptance criteria, edge cases, NFRs | `feature.md` |
+| `state-manager` | State transitions, gate checks, state.md sync | `state.json`, `state.md`, `execution_log.md` |
+| `testing-strategist` | Stack-tailored test strategy: unit/integration/e2e/negative | `test_strategy.md` |
+| `security-reviewer` | Input validation, auth/authz, secrets, injection risks | `security_review.md` |
+| `api-contract-reviewer` | Request/response schema alignment, breaking change detection | `backend_contract.md`, `frontend_contract.md` |
 
-Defines user goals, acceptance criteria, and edge cases. Outputs to `ai-control/feature.md`.
+### Backend Skills
 
-### 📐 Architect
+| Skill | Stack | Writes |
+| --- | --- | --- |
+| `backend-nestjs-architect` | NestJS | `solution.md` — module/controller/service/DTO/entity design |
+| `backend-nestjs-developer` | NestJS | `implementation_steps.md` — file-level ordered plan |
+| `backend-fastapi-architect` | FastAPI | `solution.md` — router/schema/model/service/Alembic design |
+| `backend-fastapi-developer` | FastAPI | `implementation_steps.md` — file-level ordered plan |
 
-Evaluates architecture options and proposes preferred solutions. Outputs to `ai-control/solution.md`.
+### Frontend Skills
 
-### 👨‍💻 Developer
+| Skill | Stack | Writes |
+| --- | --- | --- |
+| `frontend-react-architect` | React 18+ | `solution.md` — component tree, state ownership, data fetching plan |
+| `frontend-react-developer` | React 18+ | `implementation_steps.md` |
+| `frontend-nextjs-architect` | Next.js App Router | `solution.md` — Server/Client boundaries, cache strategy, Server Actions |
+| `frontend-nextjs-developer` | Next.js App Router | `implementation_steps.md` |
+| `frontend-angular-architect` | Angular 17+ Standalone | `solution.md` — component hierarchy, NgRx/Signals, routing, RxJS |
+| `frontend-angular-developer` | Angular 17+ Standalone | `implementation_steps.md` |
 
-Translates designs into implementation steps and high-quality code. Outputs to `ai-control/implementation_steps.md`.
+### Utility Skills (Task-Based)
 
-### 🛡️ Tech Lead
+| Skill | Purpose |
+| --- | --- |
+| `obsidian-sync` | Mirror `ai-control/` artifacts to your Obsidian vault |
+| `documentation-writer` | READMEs, ADRs, API docs, onboarding guides |
+| `code-reviewer` | Structured review: security, correctness, performance, tests |
+| `test-engineer` | Write unit, integration, and e2e test suites |
 
-Audits design and planning for security, consistency, and operational risk.
+## Rules
 
-## 🚦 Workflow Stages
+### Cross-Stack Rules (Applied to All Tasks)
 
-The workflow progresses through the following stages as tracked in `ai-control/state.md`:
+| Rule | Purpose |
+| --- | --- |
+| `00-engineering-baseline.md` | Modularity, naming, readability, maintainability |
+| `01-artifact-discipline.md` | Artifact ownership, completeness, log discipline |
+| `02-testing-quality-gates.md` | Coverage requirements, test quality, completion gates |
+| `03-security-baseline.md` | Input validation, auth/authz, secrets, OWASP prevention |
+| `04-api-contract-consistency.md` | Schema alignment, breaking change declaration |
 
-1. `PM_ANALYSIS_PENDING`
-2. `USER_REVIEW_FEATURE_PENDING`
-3. `ARCHITECT_DESIGN_PENDING`
-4. `DEV_PLANNING_PENDING`
-5. `TECH_LEAD_AUDIT_PENDING`
-6. `USER_APPROVAL_PENDING`
-7. `EXECUTION_PENDING`
-8. `PM_VERIFICATION_PENDING`
+### Stack-Specific Architecture Rules
 
-## 🔒 Git Management
+| Rule | Stack |
+| --- | --- |
+| `10-backend-nestjs.md` | NestJS — modules, DTOs, guards, DI, database |
+| `11-backend-fastapi.md` | FastAPI — routers, Pydantic, async, service layer |
+| `20-frontend-react.md` | React — component responsibility, state, forms, a11y |
+| `21-frontend-nextjs.md` | Next.js — Server/Client components, caching, Server Actions |
+| `22-frontend-angular.md` | Angular — OnPush, RxJS, reactive forms, lazy loading |
 
-The `init` command automatically adds `.agents/` and `ai-control/` to your project's `.git/info/exclude`. This ensures that your local AI context remains private to your machine and doesn't pollute the project's repository or history.
+### Quality Rules
 
-## 📄 License
+| Rule | Purpose |
+| --- | --- |
+| `code-review-standards.md` | Review severity model, merge requirements |
+| `documentation-standards.md` | Writing standards for all documentation output |
+
+## Workflows
+
+### Stack Feature Workflows (Full 9-Phase Cycle)
+
+| Workflow | Stack |
+| --- | --- |
+| `00-triage-and-route.md` | **Entry point** — classifies task and routes to correct workflow |
+| `10-backend-nestjs-feature.md` | NestJS backend feature |
+| `11-backend-fastapi-feature.md` | FastAPI backend feature |
+| `20-frontend-react-feature.md` | React frontend feature |
+| `21-frontend-nextjs-feature.md` | Next.js frontend feature |
+| `22-frontend-angular-feature.md` | Angular frontend feature |
+| `30-fullstack-nestjs-react.md` | NestJS + React — contract-first fullstack |
+| `31-fullstack-fastapi-nextjs.md` | FastAPI + Next.js — contract-first fullstack |
+
+### Task-Type Workflows
+
+| Workflow | Purpose |
+| --- | --- |
+| `40-bugfix-flow.md` | Root cause analysis, minimal fix, regression test |
+| `50-refactor-flow.md` | Safety-net-first, behavior-invariant refactoring |
+| `90-execution-gate.md` | Hard gate — verifies all artifacts, approvals, and quality gates |
+
+### Utility Workflows
+
+| Workflow | Purpose |
+| --- | --- |
+| `documentation.md` | Generate or update technical documentation |
+| `code-review.md` | Structured multi-dimensional code review |
+| `test-implementation.md` | Write test suites with coverage analysis |
+
+## State and Approvals
+
+`ai-control/state.json` is the canonical workflow state. Key approval flags:
+
+- `approvals.feature` — set to `true` after user reviews `feature.md`
+- `approvals.design` — set to `true` after user reviews `solution.md`
+- `approvals.execution` — set to `true` only by explicit user authorization
+
+Quality gates that block execution:
+
+- `quality_gates.tests_defined` — `testing-strategist` must complete `test_strategy.md`
+- `quality_gates.security_checked` — `security-reviewer` must clear `security_review.md`
+- `quality_gates.contracts_checked` — `api-contract-reviewer` must finalize contracts (API tasks)
+
+Helper scripts:
+
+```bash
+# Validate state.json structure
+python .agents/skills/state-manager/scripts/validate_state.py
+
+# Update a field safely
+python .agents/skills/state-manager/scripts/update_state.py --stage DEV_PLANNING_PENDING
+python .agents/skills/state-manager/scripts/update_state.py --approve feature
+python .agents/skills/state-manager/scripts/update_state.py --gate tests_defined
+```
+
+## Adding a New Stack
+
+1. Create `rules/XX-<stack>.md` with the next available number.
+2. Create `skills/<stack>-architect/SKILL.md` and `skills/<stack>-developer/SKILL.md`.
+3. Create `workflows/XX-<stack>-feature.md`.
+4. Add the stack to `00-triage-and-route.md` routing table.
+5. Run `cp -r .agents templates/` to mirror.
+
+## Git Management
+
+`npx antigravity-squad init` adds `.agents/` and `ai-control/` to `.git/info/exclude` — keeping
+your AI workflow context local and out of project history.
+
+## License
 
 ISC
