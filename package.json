@@ -1,6 +1,6 @@
 {
   "name": "ai-agents-squad",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Deterministic, role-based AI engineering squad for Antigravity with phased sequential workflows.",
   "main": "index.js",
   "bin": {
