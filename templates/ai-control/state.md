@@ -1,36 +1,50 @@
-# AI Control State
+# AI Workflow State
 
-**Task ID**: TASK-001
-**Task Title**: (unset)
-**Track**: none | **Stack**: none | **Type**: none
-**Current Stage**: TASK_TRIAGE_PENDING
-**Active Skill**: none
+## Task
 
-## Approvals
+Task ID: TASK-001
+Description: Build or change feature X
 
-- Feature Definition: false
-- Design: false
-- Execution: false
+Current Stage: PM_ANALYSIS_PENDING
+Active Agent: NONE
 
-## Quality Gates
+## Stack
 
-- Tests Defined: false
-- Security Checked: false
-- Contracts Checked: false
+> **Before starting a task:** Update the values below to match your project stack.
+> Roles read this section to automatically select the correct Skill (e.g. `nestjs-expert` vs `fastapi-expert`).
+
+frontend: react        # react | nextjs | angular
+backend: nestjs        # nestjs | fastapi | django
+database: postgresql   # postgresql | mongodb | redis
+cloud: aws             # aws | gcp | azure | none
 
 ## Artifacts
 
-| Artifact | File | Status |
-| --- | --- | --- |
-| feature | ai-control/feature.md | missing |
-| solution | ai-control/solution.md | missing |
-| implementation_steps | ai-control/implementation_steps.md | missing |
-| test_strategy | ai-control/test_strategy.md | missing |
-| security_review | ai-control/security_review.md | missing |
-| backend_contract | ai-control/backend_contract.md | missing |
-| frontend_contract | ai-control/frontend_contract.md | missing |
-| pm_review | ai-control/pm_review.md | missing |
-| tech_lead_review | ai-control/tech_lead_review.md | missing |
-| execution_log | ai-control/execution_log.md | missing |
+All workflow artifacts MUST be created as **Antigravity Artifacts** — not as loose files
+in `ai-control/`. The artifact paths below are automatically managed by Antigravity.
 
-Last updated: (initialized)
+| Artifact | Antigravity Type | Status | Request Feedback |
+|---|---|---|---|
+| `feature.md` | `other` | PENDING | true |
+| `solution.md` | `implementation_plan` | PENDING | true |
+| `implementation_steps.md` | `task` | PENDING | false |
+| `pm_view.md` | `other` | PENDING | false |
+| `full_implementation.md` | `walkthrough` | PENDING | false |
+| `test_strategy.md` | `other` | PENDING | false |
+| `security_review.md` | `other` | PENDING | false |
+| `backend_contract.md` | `other` | PENDING | false |
+
+## Stage Gate Reference
+
+| Stage | Artifact Produced | Needs User Approval |
+|---|---|---|
+| `PM_ANALYSIS_PENDING` | `feature.md` | YES |
+| `ARCHITECT_DESIGN_PENDING` | `solution.md`, `backend_contract.md` | YES |
+| `SECURITY_REVIEW_PENDING` | `security_review.md` | If CRITICAL/HIGH issues |
+| `TEST_STRATEGY_PENDING` | `test_strategy.md` | NO |
+| `DEV_PLANNING_PENDING` | `implementation_steps.md` | YES |
+| `PM_VERIFICATION_PENDING` | `pm_view.md` | NO |
+| `EXECUTION_PENDING` | Code + tests | NO |
+| `COMPLETED` | `full_implementation.md` | NO |
+
+## Execution Log

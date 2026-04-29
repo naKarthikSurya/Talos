@@ -4,6 +4,64 @@ A **Role-based, artifact-driven AI engineering squad** built for Antigravity. Ev
 
 ---
 
+## Installation
+
+### Install into your project
+
+```bash
+# Via SSH (recommended)
+npm install git+ssh://github-personal:naKarthikSurya/ai-agents-squad.git --no-save
+
+# Via HTTPS
+npm install git+https://github.com/naKarthikSurya/ai-agents-squad.git --no-save
+```
+
+> `--no-save` keeps this out of your `package.json` — it's a local AI workflow tool, not a production dependency.
+
+### Initialize the squad
+
+```bash
+npx antigravity-squad init
+```
+
+This will:
+
+1. **Auto-sync** `templates/` from the live `.agents/` and `ai-control/` in the package
+2. **Copy** `.agents/` and `ai-control/` into your current project
+3. **Add** both folders to `.git/info/exclude` to keep them out of version control
+
+### After making changes to roles, skills, rules, or workflows
+
+Run the sync command inside the squad package to rebuild `templates/` automatically:
+
+```bash
+npx antigravity-squad sync
+```
+
+This deletes the old `templates/` contents and rebuilds them fresh from the current `.agents/` and `ai-control/`. No manual copying needed.
+
+### Configure your stack
+
+Open `ai-control/state.md` and update the `## Stack` section to match your project:
+
+```markdown
+frontend: nextjs      # react | nextjs | angular
+backend: nestjs       # nestjs | fastapi | django
+database: postgresql  # postgresql | mongodb | redis
+cloud: aws            # aws | gcp | azure | none
+```
+
+Roles read this to automatically select the correct Skill (e.g. `nestjs-expert` vs `fastapi-expert`).
+
+### Removal
+
+```bash
+npm uninstall ai-agents-squad --no-save
+rm -rf .agents ai-control
+```
+
+---
+
 ## How It Works
 
 The squad is organized into four layers:
@@ -29,7 +87,11 @@ A task always moves forward through **stages**, each stage owned by a **Role**, 
   workflows/    # 11 Role-specific workflow files — phased procedures
 
 ai-control/
-  state.md      # Current task state, stage, and artifact status table
+  state.md      # Current task state, stage, stack config, and artifact status
+
+templates/      # Scaffold source — auto-managed by the CLI
+                # Rebuilt automatically on every `init` and `sync` run
+                # Never edit manually — always edit .agents/ and ai-control/ directly
 ```
 
 ---

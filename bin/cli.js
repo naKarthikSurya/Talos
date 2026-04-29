@@ -5,14 +5,72 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const command = process.argv[2];
+const packageRoot = path.join(__dirname, '..');  // root of ai-agents-squad package
+const templatePath = path.join(packageRoot, 'templates');
+
+// ─── SYNC ────────────────────────────────────────────────────────────────────
+// Rebuilds templates/ from the live .agents/ and ai-control/ in the package root.
+// Called automatically before init, and available as a standalone command.
+
+function syncTemplates() {
+  const sources = ['.agents', 'ai-control'];
+
+  console.log('Syncing templates from live source...');
+
+  sources.forEach(folder => {
+    const src = path.join(packageRoot, folder);
+    const dest = path.join(templatePath, folder);
+
+    if (!fs.existsSync(src)) {
+      console.warn(`  Warning: source ${folder}/ not found in package. Skipping.`);
+      return;
+    }
+
+    // Delete old template copy
+    if (fs.existsSync(dest)) {
+      if (process.platform === 'win32') {
+        execSync(`rmdir /s /q "${dest}"`);
+      } else {
+        execSync(`rm -rf "${dest}"`);
+      }
+    }
+
+    // Copy fresh from live source
+    if (process.platform === 'win32') {
+      execSync(`xcopy "${src}" "${dest}" /E /I /H /Y`);
+    } else {
+      execSync(`cp -r "${src}" "${dest}"`);
+    }
+
+    console.log(`  ✓ templates/${folder} rebuilt from ./${folder}`);
+  });
+
+  console.log('Templates synced successfully.');
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+// Syncs templates first, then copies them into the target project.
 
 if (command === 'init') {
   const projectRoot = process.cwd();
-  const templatePath = path.join(__dirname, '../templates');
+
+  // If running init from inside the package itself, just sync templates and stop
+  if (projectRoot === packageRoot) {
+    console.log('Running inside the squad package — syncing templates only.');
+    syncTemplates();
+    process.exit(0);
+  }
 
   console.log('Initializing AI Agents Squad...');
 
-  // Copy .agents and ai-control
+  // Always sync templates before copying so they are up to date
+  try {
+    syncTemplates();
+  } catch (err) {
+    console.warn('Warning: Could not sync templates:', err.message);
+  }
+
+  // Copy .agents and ai-control into the target project
   const folders = ['.agents', 'ai-control'];
 
   folders.forEach(folder => {
@@ -20,25 +78,26 @@ if (command === 'init') {
     const dest = path.join(projectRoot, folder);
 
     if (fs.existsSync(dest)) {
-      console.warn(`Warning: ${folder} already exists. Skipping.`);
+      console.warn(`  Warning: ${folder}/ already exists in this project. Skipping.`);
     } else {
-      console.log(`Creating ${folder}...`);
+      console.log(`  Creating ${folder}/...`);
       try {
         if (process.platform === 'win32') {
           execSync(`xcopy "${src}" "${dest}" /E /I /H /Y`);
         } else {
           execSync(`cp -r "${src}" "${dest}"`);
         }
+        console.log(`  ✓ ${folder} created`);
       } catch (err) {
-        console.error(`Error copying ${folder}:`, err.message);
+        console.error(`  Error copying ${folder}:`, err.message);
       }
     }
   });
 
-  // Add to .git/info/exclude if it exists
+  // Add to .git/info/exclude if inside a git repo
   const gitExcludePath = path.join(projectRoot, '.git/info/exclude');
   if (fs.existsSync(path.join(projectRoot, '.git'))) {
-    console.log('Adding folders to .git/info/exclude...');
+    console.log('Adding to .git/info/exclude...');
     try {
       if (!fs.existsSync(path.dirname(gitExcludePath))) {
         fs.mkdirSync(path.dirname(gitExcludePath), { recursive: true });
@@ -53,21 +112,34 @@ if (command === 'init') {
       const newExcludes = toExclude.filter(f => !currentExclude.includes(f));
 
       if (newExcludes.length > 0) {
-        const appendText = (currentExclude.endsWith('\n') ? '' : '\n') +
+        const appendText =
+          (currentExclude.endsWith('\n') ? '' : '\n') +
           '# Antigravity AI Agents Squad\n' +
           newExcludes.join('\n') + '\n';
         fs.appendFileSync(gitExcludePath, appendText);
-        console.log('Folders added to .git/info/exclude.');
+        console.log('  ✓ Folders added to .git/info/exclude');
       } else {
-        console.log('Folders already excluded.');
+        console.log('  ✓ Already excluded');
       }
     } catch (err) {
-      console.warn('Warning: Could not update .git/info/exclude:', err.message);
+      console.warn('  Warning: Could not update .git/info/exclude:', err.message);
     }
   }
 
-  console.log('Successfully initialized AI Agents Squad!');
-  console.log('You can now use the following roles: Product Manager, Architect, Developer, Tech Lead.');
+  console.log('\n✅ AI Agents Squad initialized successfully!');
+  console.log('Next: Update ai-control/state.md with your project stack and task description.');
+
+// ─── SYNC (standalone command) ────────────────────────────────────────────────
+} else if (command === 'sync') {
+  try {
+    syncTemplates();
+  } catch (err) {
+    console.error('Sync failed:', err.message);
+    process.exit(1);
+  }
+
 } else {
-  console.log('Usage: antigravity-squad init');
+  console.log('Usage:');
+  console.log('  antigravity-squad init   — Initialize the squad in the current project');
+  console.log('  antigravity-squad sync   — Rebuild templates/ from live .agents/ and ai-control/');
 }
