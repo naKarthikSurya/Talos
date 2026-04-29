@@ -55,6 +55,13 @@ scalability strategy, and security model before any implementation begins.
 > - **RequestFeedback**: `false`
 > - **Summary**: "API contract for [feature name] — endpoints, request/response shapes, error codes."
 
+Update `state.md`:
+- `Active Role`: `System Architect`
+- `backend_contract.md` status: `REVIEW_PENDING`
+
+**STOP** — Create the `backend_contract.md` artifact and stop immediately. Await user feedback or approval before creating the `solution.md` artifact.
+
+
 ---
 
 ## Phase 5: Solution Artifact Production
@@ -73,9 +80,12 @@ The artifact must include:
 - Security model (trust boundaries, STRIDE mitigations)
 - Open risks
 
-Update `state.md`: set `solution.md` status to `REVIEW_PENDING`.
+Update `state.md`: 
+- `Active Role`: `System Architect`
+- `solution.md` status: `REVIEW_PENDING`
 
-**STOP** — Present artifact to user. Do NOT proceed until explicitly approved.
+**STOP** — Create the `solution.md` artifact and stop immediately. Do NOT proceed until explicitly approved.
+
 
 ---
 

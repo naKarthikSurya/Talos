@@ -1,13 +1,14 @@
 {
   "name": "ai-agents-squad",
-  "version": "1.0.0",
-  "description": "Scaffold a structured AI engineering squad workflow.",
+  "version": "1.0.1",
+  "description": "Deterministic, role-based AI engineering squad for Antigravity with phased sequential workflows.",
   "main": "index.js",
   "bin": {
     "antigravity-squad": "./bin/cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync": "node bin/cli.js sync"
   },
   "repository": {
     "type": "git",
@@ -15,11 +16,11 @@
   },
   "keywords": [
     "antigravity",
-    "ai",
-    "agents",
-    "workflow",
-    "squad"
+    "ai-agents",
+    "ai-squad",
+    "workflow-automation",
+    "role-based-agents"
   ],
-  "author": "",
-  "license": "ISC"
+  "author": "Karthik Surya",
+  "license": "UNLICENSED"
 }
