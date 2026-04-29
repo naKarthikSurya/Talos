@@ -1,10 +1,22 @@
 # AI Workflow State
 
+## Task
+
 Task ID: TASK-001
 Description: Build or change feature X
 
 Current Stage: PM_ANALYSIS_PENDING
 Active Agent: NONE
+
+## Stack
+
+> **Before starting a task:** Update the values below to match your project stack.
+> Roles read this section to automatically select the correct Skill (e.g. `nestjs-expert` vs `fastapi-expert`).
+
+frontend: react        # react | nextjs | angular
+backend: nestjs        # nestjs | fastapi | django
+database: postgresql   # postgresql | mongodb | redis
+cloud: aws             # aws | gcp | azure | none
 
 ## Artifacts
 
@@ -36,5 +48,3 @@ in `ai-control/`. The artifact paths below are automatically managed by Antigrav
 | `COMPLETED` | `full_implementation.md` | NO |
 
 ## Execution Log
-
-- 2026-04-20: Initialized workflow. Waiting for PM analysis.
