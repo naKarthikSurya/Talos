@@ -38,13 +38,13 @@ framework skill based on the project stack.
 ## Skill Selection Rule
 
 > [!IMPORTANT]
-> Only one framework skill should be active per project. Check `ai-control/state.json`
+> Only one framework skill should be active per project. Check `ai-control/state.md`
 > for `stack.backend` to determine the correct skill. `api-design-standard` is always
 > activated concurrently regardless of framework.
 
 ## Operating Procedure
 
-1. Read `ai-control/state.json` → `stack.backend` to select the correct framework skill.
+1. Read `ai-control/state.md` → `stack.backend` to select the correct framework skill.
 2. Always activate `api-design-standard` alongside the framework skill.
 3. Implement controllers/routers, services, repositories/DAOs, and validators.
 4. Follow validation and error handling conventions from `api-design-standard`.
