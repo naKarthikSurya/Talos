@@ -1,0 +1,31 @@
+{
+  "task_id": "TASK-001",
+  "task_title": "",
+  "track": "none",
+  "stack": "none",
+  "task_type": "none",
+  "current_stage": "TASK_TRIAGE_PENDING",
+  "active_skill": "none",
+  "approvals": {
+    "feature": false,
+    "design": false,
+    "execution": false
+  },
+  "quality_gates": {
+    "tests_defined": false,
+    "security_checked": false,
+    "contracts_checked": false
+  },
+  "artifacts": {
+    "feature": "ai-control/feature.md",
+    "solution": "ai-control/solution.md",
+    "implementation_steps": "ai-control/implementation_steps.md",
+    "test_strategy": "ai-control/test_strategy.md",
+    "security_review": "ai-control/security_review.md",
+    "backend_contract": "ai-control/backend_contract.md",
+    "frontend_contract": "ai-control/frontend_contract.md",
+    "pm_review": "ai-control/pm_review.md",
+    "tech_lead_review": "ai-control/tech_lead_review.md",
+    "execution_log": "ai-control/execution_log.md"
+  }
+}
