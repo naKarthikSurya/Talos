@@ -16,6 +16,10 @@ function syncTemplates() {
   const sources = ['.agents', 'ai-control'];
 
   console.log('Syncing templates from live source...');
+  
+  if (!fs.existsSync(templatePath)) {
+    fs.mkdirSync(templatePath, { recursive: true });
+  }
 
   sources.forEach(folder => {
     const src = path.join(packageRoot, folder);
