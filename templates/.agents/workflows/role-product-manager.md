@@ -60,9 +60,12 @@ The artifact must include:
 - Unknowns / Open Questions
 - Risks
 
-Update `state.md`: set `feature.md` status to `REVIEW_PENDING`.
+Update `state.md`: 
+- `Active Role`: `Product Manager`
+- `feature.md` status: `REVIEW_PENDING`
 
-**STOP** — The artifact will be presented to the user for approval. Do NOT proceed until explicitly approved.
+**STOP** — Create the `feature.md` artifact and stop immediately. Do NOT move to any other phase or create another artifact until this one is approved.
+
 
 ---
 

@@ -6,7 +6,14 @@ Task ID: TASK-001
 Description: Build or change feature X
 
 Current Stage: PM_ANALYSIS_PENDING
-Active Agent: NONE
+Active Role: NONE
+
+## 📋 Role-Based Workflow Instructions
+
+1. **One Artifact at a Time**: The Active Role will create exactly one artifact per turn.
+2. **Approval Gate**: You must approve the artifact (or provide feedback) before the role proceeds to the next stage.
+3. **Role vs Skill**: Artifacts are owned by **Roles**. Technical **Skills** are tools the roles use internally.
+
 
 ## Stack
 
