@@ -13,7 +13,8 @@ Active Role: NONE
 1. **One Artifact at a Time**: The Active Role will create exactly one artifact per turn.
 2. **Approval Gate**: You must approve the artifact (or provide feedback) before the role proceeds to the next stage.
 3. **Role vs Skill**: Artifacts are owned by **Roles**. Technical **Skills** are tools the roles use internally.
-
+4. **Self-Healing State**: If a new chat starts with a different task than what is listed below, the model MUST archive this task into the `Execution Log` and reset the state for the new task.
+5. **Sync Requirement**: The model MUST update this file as the final action of every stage transition.
 
 ## Stack
 

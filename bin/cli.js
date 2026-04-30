@@ -13,7 +13,7 @@ const templatePath = path.join(packageRoot, 'templates');
 // Called automatically before init, and available as a standalone command.
 
 function syncTemplates() {
-  const sources = ['.agents', 'ai-control'];
+  const sources = ['.agents', 'ai-control', '.cursorrules', '.clinerules', '.ai-rules.md'];
 
   console.log('Syncing templates from live source...');
   
@@ -75,7 +75,7 @@ if (command === 'init') {
   }
 
   // Copy .agents and ai-control into the target project
-  const folders = ['.agents', 'ai-control'];
+  const folders = ['.agents', 'ai-control', '.cursorrules', '.clinerules', '.ai-rules.md'];
 
   folders.forEach(folder => {
     const src = path.join(templatePath, folder);
@@ -112,8 +112,8 @@ if (command === 'init') {
         currentExclude = fs.readFileSync(gitExcludePath, 'utf8');
       }
 
-      const toExclude = folders.map(f => `${f}/`);
-      const newExcludes = toExclude.filter(f => !currentExclude.includes(f));
+      const finalizedExcludes = folders.map(f => f.startsWith('.') && !f.includes('/', 1) && f !== '.agents' ? f : `${f}/`);
+      const newExcludes = finalizedExcludes.filter(f => !currentExclude.includes(f));
 
       if (newExcludes.length > 0) {
         const appendText =

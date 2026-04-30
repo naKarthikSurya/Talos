@@ -27,8 +27,9 @@ npx antigravity-squad init
 This will:
 
 1. **Auto-sync** `templates/` from the live `.agents/` and `ai-control/` in the package
-2. **Copy** `.agents/` and `ai-control/` into your current project
-3. **Add** both folders to `.git/info/exclude` to keep them out of version control
+2. **Copy** `.agents/`, `ai-control/`, and `.cursorrules` into your current project
+3. **Add** all folders/files to `.git/info/exclude` to keep them out of version control
+4. **Automate**: The `.cursorrules` file automatically instructs any AI assistant to follow the squad protocol without manual setup.
 
 ### After making changes to roles, skills, rules, or workflows
 
