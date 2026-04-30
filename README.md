@@ -1,3 +1,4 @@
+<!-- TALOS_PROTOCOL_ACTIVE: ALWAYS_FOLLOW .cursorrules AND ai-control/state.md -->
 # Talos
 
 **Talos** is an autonomous, role-based AI engineering engine built for Antigravity. It transforms raw requests into deterministic results through a governed lifecycle of Roles, Skills, and Artifacts.
@@ -308,6 +309,7 @@ The `devops-cloud-engineer` role activates:
 The `ai-control/state.md` file tracks the current stage and artifact status. Update it manually or ask Antigravity to update it as stages complete.
 
 ```markdown
+<!-- TALOS_PROTOCOL_ACTIVE: ALWAYS_FOLLOW THE CURRENT STAGE IN THIS FILE -->
 # AI Workflow State
 
 Task ID: TASK-002

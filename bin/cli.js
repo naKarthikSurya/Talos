@@ -57,6 +57,7 @@ function syncTemplates() {
 
 if (command === 'init') {
   const projectRoot = process.cwd();
+  const overwrite = process.argv.includes('--overwrite');
 
   // If running init from inside the package itself, just sync templates and stop
   if (projectRoot === packageRoot) {
@@ -81,10 +82,19 @@ if (command === 'init') {
     const src = path.join(templatePath, folder);
     const dest = path.join(projectRoot, folder);
 
-    if (fs.existsSync(dest)) {
+    if (fs.existsSync(dest) && !overwrite) {
       console.warn(`  Warning: ${folder}/ already exists in this project. Skipping.`);
     } else {
-      console.log(`  Creating ${folder}/...`);
+      if (fs.existsSync(dest) && overwrite) {
+        console.log(`  Overwriting ${folder}/...`);
+        if (process.platform === 'win32') {
+          execSync(`rmdir /s /q "${dest}"`);
+        } else {
+          execSync(`rm -rf "${dest}"`);
+        }
+      } else {
+        console.log(`  Creating ${folder}/...`);
+      }
       try {
         if (process.platform === 'win32') {
           execSync(`xcopy "${src}" "${dest}" /E /I /H /Y`);
@@ -144,6 +154,6 @@ if (command === 'init') {
 
 } else {
   console.log('Usage:');
-  console.log('  talos init   — Initialize Talos in the current project');
+  console.log('  talos init [--overwrite] — Initialize Talos (use --overwrite to update existing folders)');
   console.log('  talos sync   — Rebuild templates from live source');
 }
