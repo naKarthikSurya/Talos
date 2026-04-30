@@ -1,6 +1,6 @@
-# Antigravity Autonomous Squad Protocol
+# The Talos Protocol
 
-You are operating within a deterministic, role-based AI engineering squad.
+You are operating within a deterministic, role-based AI engineering engine.
 At the start of EVERY turn, you MUST:
 
 1. **Sync State**: Read `ai-control/state.md` to identify the `Current Stage` and `Active Role`.

@@ -1,6 +1,6 @@
-# AI Agents Squad
+# Talos
 
-A **Role-based, artifact-driven AI engineering squad** built for Antigravity. Every task flows through defined Roles, activates the right Skills, enforces specific Rules, and follows a phased Workflow — all producing Antigravity Artifacts at every stage.
+**Talos** is an autonomous, role-based AI engineering engine built for Antigravity. It transforms raw requests into deterministic results through a governed lifecycle of Roles, Skills, and Artifacts.
 
 ---
 
@@ -10,18 +10,18 @@ A **Role-based, artifact-driven AI engineering squad** built for Antigravity. Ev
 
 ```bash
 # Via SSH (recommended)
-npm install git+ssh://github-personal:naKarthikSurya/ai-agents-squad.git --no-save
+npm install git+ssh://git@github.com:naKarthikSurya/Talos.git --no-save
 
 # Via HTTPS
-npm install git+https://github.com/naKarthikSurya/ai-agents-squad.git --no-save
+npm install https://github.com/naKarthikSurya/Talos.git --no-save
 ```
 
 > `--no-save` keeps this out of your `package.json` — it's a local AI workflow tool, not a production dependency.
 
-### Initialize the squad
+### Initialize Talos
 
 ```bash
-npx antigravity-squad init
+npx talos init
 ```
 
 This will:
@@ -36,7 +36,7 @@ This will:
 Run the sync command inside the squad package to rebuild `templates/` automatically:
 
 ```bash
-npx antigravity-squad sync
+npx talos sync
 ```
 
 This deletes the old `templates/` contents and rebuilds them fresh from the current `.agents/` and `ai-control/`. No manual copying needed.
@@ -57,7 +57,7 @@ Roles read this to automatically select the correct Skill (e.g. `nestjs-expert` 
 ### Removal
 
 ```bash
-npm uninstall ai-agents-squad --no-save
+npm uninstall talos-ai --no-save
 rm -rf .agents ai-control
 ```
 
@@ -65,7 +65,7 @@ rm -rf .agents ai-control
 
 ## How It Works
 
-The squad is organized into four layers:
+Talos is organized into four layers:
 
 ```
 Role → selects → Skills
@@ -159,7 +159,7 @@ COMPLETED
 
 ## Slash Command Workflows
 
-The squad is powered by custom slash commands in Antigravity. These commands chain together roles and skills to perform complex, multi-step tasks.
+Talos is powered by custom slash commands in Antigravity. These commands chain together roles and skills to perform complex, multi-step tasks.
 
 | Command | Role | Description |
 |---|---|---|
@@ -174,7 +174,7 @@ The squad is powered by custom slash commands in Antigravity. These commands cha
 | `/db-optimization` | `@db` | Reviews schema design and optimizes queries. |
 | `/devops-check` | `@devops` | Verifies CI/CD, Docker, and infrastructure. |
 | `/maintenance-check` | `@maintenance` | Refactors debt and manages dependencies. |
-| `/full-review` | `Squad` | Runs a comprehensive, multi-role project audit. |
+| `/full-review` | `Talos` | Runs a comprehensive, multi-role project audit. |
 
 ---
 

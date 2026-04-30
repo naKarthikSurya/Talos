@@ -60,12 +60,12 @@ if (command === 'init') {
 
   // If running init from inside the package itself, just sync templates and stop
   if (projectRoot === packageRoot) {
-    console.log('Running inside the squad package — syncing templates only.');
+    console.log('Running inside the Talos package — syncing templates only.');
     syncTemplates();
     process.exit(0);
   }
 
-  console.log('Initializing AI Agents Squad...');
+  console.log('Initializing Talos...');
 
   // Always sync templates before copying so they are up to date
   try {
@@ -118,7 +118,7 @@ if (command === 'init') {
       if (newExcludes.length > 0) {
         const appendText =
           (currentExclude.endsWith('\n') ? '' : '\n') +
-          '# Antigravity AI Agents Squad\n' +
+          '# Antigravity Talos AI\n' +
           newExcludes.join('\n') + '\n';
         fs.appendFileSync(gitExcludePath, appendText);
         console.log('  ✓ Folders added to .git/info/exclude');
@@ -130,7 +130,7 @@ if (command === 'init') {
     }
   }
 
-  console.log('\n✅ AI Agents Squad initialized successfully!');
+  console.log('\n✅ Talos initialized successfully!');
   console.log('Next: Update ai-control/state.md with your project stack and task description.');
 
 // ─── SYNC (standalone command) ────────────────────────────────────────────────
@@ -144,6 +144,6 @@ if (command === 'init') {
 
 } else {
   console.log('Usage:');
-  console.log('  antigravity-squad init   — Initialize the squad in the current project');
-  console.log('  antigravity-squad sync   — Rebuild templates/ from live .agents/ and ai-control/');
+  console.log('  talos init   — Initialize Talos in the current project');
+  console.log('  talos sync   — Rebuild templates from live source');
 }

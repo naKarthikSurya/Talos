@@ -1,4 +1,4 @@
-# Squad Protocol for Cline / Roo-Code / Claude
+# The Talos Protocol
 At the start of every session:
 1. Read `ai-control/state.md`.
 2. Follow the role-based workflow in `.agents/`.

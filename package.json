@@ -1,10 +1,10 @@
 {
-  "name": "ai-agents-squad",
-  "version": "1.0.2",
-  "description": "Deterministic, role-based AI engineering squad for Antigravity with phased sequential workflows.",
+  "name": "talos-ai",
+  "version": "1.0.5",
+  "description": "Talos: The autonomous AI engineering engine for Antigravity.",
   "main": "index.js",
   "bin": {
-    "antigravity-squad": "./bin/cli.js"
+    "talos": "./bin/cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "github-personal:naKarthikSurya/ai-agents-squad.git"
+    "url": "https://github.com/naKarthikSurya/Talos.git"
   },
   "keywords": [
     "antigravity",
     "ai-agents",
-    "ai-squad",
+    "talos-ai",
     "workflow-automation",
     "role-based-agents"
   ],
