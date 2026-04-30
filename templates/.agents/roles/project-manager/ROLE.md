@@ -39,7 +39,7 @@ documentation artifacts.
 1. Activate `agile-scrum-master` to break the feature into sprint-sized user stories and tasks.
 2. Activate `task-estimation` to assign story points or time estimates.
 3. Activate `technical-documentation` to draft or update all required documentation.
-4. Update `ai-control/state.json` to reflect planning is complete.
+4. Update `ai-control/state.md` to reflect planning is complete.
 
 ## Constraints
 

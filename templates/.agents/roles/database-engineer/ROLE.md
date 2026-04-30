@@ -36,13 +36,13 @@ schemas are normalized, migrations are safe, queries are efficient, and data int
 
 ## Skill Selection Rule
 
-> Check `ai-control/state.json` → `stack.database`. For relational databases use
+> Check `ai-control/state.md` → `stack.database`. For relational databases use
 > `postgresql-optimization`. For document/key-value databases use `nosql-modeling`.
 > `database-migration-lead` is always activated when schema changes are involved.
 
 ## Operating Procedure
 
-1. Read `ai-control/state.json` → `stack.database` to select the correct skill.
+1. Read `ai-control/state.md` → `stack.database` to select the correct skill.
 2. Activate `database-migration-lead` whenever a schema change is required.
 3. Activate `postgresql-optimization` or `nosql-modeling` based on the database type.
 4. Review ERD diagrams, define relationships, constraints, and indexes.

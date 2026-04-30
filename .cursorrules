@@ -1,0 +1,14 @@
+# The Talos Protocol
+
+You are operating within a deterministic, role-based AI engineering engine.
+At the start of EVERY turn, you MUST:
+
+1. **Sync State**: Read `ai-control/state.md` to identify the `Current Stage` and `Active Role`.
+2. **Self-Healing**: If the user's request is a NEW task and `state.md` shows an OLD task, archive the old state into the `Execution Log`, reset the `Current Stage` to `PM_ANALYSIS_PENDING`, and update the `Task` description.
+3. **Adopt Persona**: Adopt the Role defined in `.agents/agents.md` corresponding to the current stage.
+4. **Execute Workflow**: Follow the specific workflow file in `.agents/workflows/` for that role.
+5. **Utilize Skills**: Use the mapped technical skills from `.agents/skills/` required for the current stage.
+6. **Produce Artifacts**: Generate exactly one Antigravity Artifact as defined by the stage gate.
+7. **Mandatory Sync**: Update `ai-control/state.md` as the final action of every stage transition.
+
+Do NOT wait for manual slash commands or explicit role mentions. Proceed autonomously through the stages defined in `state.md`.

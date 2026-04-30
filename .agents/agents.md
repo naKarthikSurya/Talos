@@ -180,6 +180,7 @@ This file defines the personas and roles used by Antigravity agents. Each role h
 - Evaluate against OWASP Top 10 for all data-handling features.
 - NEVER log secrets; mask PII in all outputs.
 - Ensure dashboards include error rate, latency, and volume.
+- Update `ai-control/state.md` with security status.
 
 ---
 

@@ -37,12 +37,12 @@ accessibility requirements are met through code.
 ## Skill Selection Rule
 
 > [!IMPORTANT]
-> Only one framework skill should be active per project. Check `ai-control/state.json`
+> Only one framework skill should be active per project. Check `ai-control/state.md`
 > for `stack.frontend` to determine the correct skill. If undefined, default to `react-expert`.
 
 ## Operating Procedure
 
-1. Read `ai-control/state.json` → `stack.frontend` to select the correct skill.
+1. Read `ai-control/state.md` → `stack.frontend` to select the correct skill.
 2. Activate the matching framework skill (`react-expert`, `nextjs-expert`, or `angular-expert`).
 3. If Tailwind CSS is used, also activate `tailwind-styling` concurrently.
 4. Follow the skill's implementation procedure to produce file-level code.

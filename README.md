@@ -1,6 +1,6 @@
-# AI Agents Squad
+# Talos
 
-A **Role-based, artifact-driven AI engineering squad** built for Antigravity. Every task flows through defined Roles, activates the right Skills, enforces specific Rules, and follows a phased Workflow — all producing Antigravity Artifacts at every stage.
+**Talos** is an autonomous, role-based AI engineering engine built for Antigravity. It transforms raw requests into deterministic results through a governed lifecycle of Roles, Skills, and Artifacts.
 
 ---
 
@@ -10,32 +10,33 @@ A **Role-based, artifact-driven AI engineering squad** built for Antigravity. Ev
 
 ```bash
 # Via SSH (recommended)
-npm install git+ssh://github-personal:naKarthikSurya/ai-agents-squad.git --no-save
+npm install git+ssh://git@github.com:naKarthikSurya/Talos.git --no-save
 
 # Via HTTPS
-npm install git+https://github.com/naKarthikSurya/ai-agents-squad.git --no-save
+npm install https://github.com/naKarthikSurya/Talos.git --no-save
 ```
 
 > `--no-save` keeps this out of your `package.json` — it's a local AI workflow tool, not a production dependency.
 
-### Initialize the squad
+### Initialize Talos
 
 ```bash
-npx antigravity-squad init
+npx talos init
 ```
 
 This will:
 
 1. **Auto-sync** `templates/` from the live `.agents/` and `ai-control/` in the package
-2. **Copy** `.agents/` and `ai-control/` into your current project
-3. **Add** both folders to `.git/info/exclude` to keep them out of version control
+2. **Copy** `.agents/`, `ai-control/`, and `.cursorrules` into your current project
+3. **Add** all folders/files to `.git/info/exclude` to keep them out of version control
+4. **Automate**: The `.cursorrules` file automatically instructs any AI assistant to follow the squad protocol without manual setup.
 
 ### After making changes to roles, skills, rules, or workflows
 
 Run the sync command inside the squad package to rebuild `templates/` automatically:
 
 ```bash
-npx antigravity-squad sync
+npx talos sync
 ```
 
 This deletes the old `templates/` contents and rebuilds them fresh from the current `.agents/` and `ai-control/`. No manual copying needed.
@@ -56,7 +57,7 @@ Roles read this to automatically select the correct Skill (e.g. `nestjs-expert` 
 ### Removal
 
 ```bash
-npm uninstall ai-agents-squad --no-save
+npm uninstall talos-ai --no-save
 rm -rf .agents ai-control
 ```
 
@@ -64,7 +65,7 @@ rm -rf .agents ai-control
 
 ## How It Works
 
-The squad is organized into four layers:
+Talos is organized into four layers:
 
 ```
 Role → selects → Skills
@@ -82,9 +83,9 @@ A task always moves forward through **stages**, each stage owned by a **Role**, 
 ```
 .agents/
   roles/        # 11 Role definitions — each Role owns a domain
-  skills/       # 35 Skills — technical deep-dives used by Roles
+  skills/       # 41 Skills — technical deep-dives used by Roles
   rules/        # 11 Role-specific rule files — enforced constraints
-  workflows/    # 11 Role-specific workflow files — phased procedures
+  workflows/    # 12 Role-specific workflow files — phased procedures
 
 ai-control/
   state.md      # Current task state, stage, stack config, and artifact status
@@ -102,17 +103,17 @@ Each Role has a `ROLE.md` in `.agents/roles/`, a dedicated rule file in `.agents
 
 | Role | Domain | Mapped Skills |
 |---|---|---|
-| `product-manager` | Requirements, MVP, user stories | `requirement-analysis`, `mvp-planning`, `user-story-definition` |
-| `project-manager` | Sprint planning, estimation, documentation | `agile-scrum-master`, `task-estimation`, `technical-documentation` |
-| `ux-ui-designer` | UX flows, UI components, responsive design | `ux-research-flows`, `ui-component-design`, `responsive-design-expert` |
-| `system-architect` | Architecture, scalability, security design | `distributed-systems-design`, `scalability-architect`, `security-architecture` |
-| `frontend-developer` | Frontend implementation | `react-expert`, `nextjs-expert`, `angular-expert`, `tailwind-styling` |
-| `backend-developer` | Backend APIs, services, database integration | `nestjs-expert`, `fastapi-expert`, `django-expert`, `api-design-standard` |
-| `database-engineer` | Schema design, migrations, query optimization | `postgresql-optimization`, `nosql-modeling`, `database-migration-lead` |
-| `devops-cloud-engineer` | Containers, CI/CD, cloud infrastructure | `docker-containerization`, `ci-cd-pipelines`, `aws-infrastructure` |
-| `qa-testing-engineer` | Unit, integration, E2E, performance testing | `unit-integration-testing`, `e2e-playwright-cypress`, `performance-load-testing` |
-| `security-observability-lead` | Auth, security hardening, logging, monitoring | `auth-security-hardening`, `logging-monitoring-grafana`, `error-tracking-sentry` |
-| `maintenance-support-engineer` | Bug fixes, refactoring, dependency management, incidents | `legacy-code-refactoring`, `dependency-lifecycle-management`, `incident-response-debugging` |
+| `product-manager` (@pm) | Requirements, MVP, user stories | `requirement-analysis`, `mvp-planning`, `user-story-definition` |
+| `project-manager` (@project) | Sprint planning, estimation, documentation | `agile-scrum-master`, `task-estimation`, `technical-documentation` |
+| `ux-ui-designer` (@designer) | UX flows, UI components, responsive design | `ux-research-flows`, `ui-component-design`, `responsive-design-expert` |
+| `system-architect` (@architect) | Architecture, scalability, security design | `distributed-systems-design`, `scalability-architect`, `security-architecture` |
+| `frontend-developer` (@frontend) | Frontend implementation | `react-expert`, `nextjs-expert`, `angular-expert`, `tailwind-styling` |
+| `backend-developer` (@backend) | Backend APIs, services, database integration | `nestjs-expert`, `fastapi-expert`, `django-expert`, `api-design-standard` |
+| `database-engineer` (@db) | Schema design, migrations, query optimization | `postgresql-optimization`, `nosql-modeling`, `database-migration-lead` |
+| `devops-cloud-engineer` (@devops) | Containers, CI/CD, cloud infrastructure | `docker-containerization`, `ci-cd-pipelines`, `aws-infrastructure` |
+| `qa-testing-engineer` (@qa) | Unit, integration, E2E, performance testing | `unit-integration-testing`, `e2e-playwright-cypress`, `performance-load-testing` |
+| `security-observability-lead` (@security) | Auth, security hardening, logging, monitoring | `auth-security-hardening`, `logging-monitoring-grafana`, `error-tracking-sentry` |
+| `maintenance-support-engineer` (@maintenance) | Bug fixes, refactoring, dependency management, incidents | `legacy-code-refactoring`, `dependency-lifecycle-management`, `incident-response-debugging` |
 
 ---
 
@@ -121,38 +122,59 @@ Each Role has a `ROLE.md` in `.agents/roles/`, a dedicated rule file in `.agents
 Every new feature follows this stage progression. Each stage is owned by a Role and produces an Antigravity Artifact.
 
 ```
-PM_ANALYSIS_PENDING
-  └─ Role: product-manager
+PM_ANALYSIS_PENDING        # Command: /pm-analysis
+  └─ Role: @pm
   └─ Artifact: feature.md (type: other) ← USER APPROVAL REQUIRED
 
-ARCHITECT_DESIGN_PENDING
-  └─ Role: system-architect
+ARCHITECT_DESIGN_PENDING   # Command: /architect-design
+  └─ Role: @architect
   └─ Artifact: solution.md (type: implementation_plan) ← USER APPROVAL REQUIRED
   └─ Artifact: backend_contract.md (type: other)
 
-SECURITY_REVIEW_PENDING
-  └─ Role: security-observability-lead
+SECURITY_REVIEW_PENDING    # Command: /security-audit
+  └─ Role: @security
   └─ Artifact: security_review.md (type: other) ← STOP if CRITICAL/HIGH issues
 
-TEST_STRATEGY_PENDING
-  └─ Role: qa-testing-engineer
+TEST_STRATEGY_PENDING      # Command: /qa-audit
+  └─ Role: @qa
   └─ Artifact: test_strategy.md (type: other)
 
-DEV_PLANNING_PENDING
-  └─ Role: backend-developer or frontend-developer
+DEV_PLANNING_PENDING       # Command: /project-planning
+  └─ Role: @backend or @frontend
   └─ Artifact: implementation_steps.md (type: task) ← USER APPROVAL REQUIRED
 
-PM_VERIFICATION_PENDING
-  └─ Role: product-manager (verification pass)
+PM_VERIFICATION_PENDING    # Command: /pm-analysis (verify mode)
+  └─ Role: @pm (verification pass)
   └─ Artifact: pm_view.md (type: other)
 
 EXECUTION_PENDING
-  └─ Role: backend-developer or frontend-developer
+  └─ Role: @backend or @frontend
   └─ Code + tests written step by step
 
 COMPLETED
   └─ Artifact: full_implementation.md (type: walkthrough)
 ```
+
+---
+
+## Slash Command Workflows
+
+Talos is powered by custom slash commands in Antigravity. These commands chain together roles and skills to perform complex, multi-step tasks.
+
+| Command | Role | Description |
+|---|---|---|
+| `/pm-analysis` | `@pm` | Extracts requirements, plans MVP, and writes user stories. |
+| `/architect-design` | `@architect` | Defines architecture and API contracts. |
+| `/security-audit` | `@security` | Audits for vulnerabilities and observability. |
+| `/qa-audit` | `@qa` | Audits for bugs, edge cases, and test coverage. |
+| `/project-planning` | `@project` | Estimates tasks and generates documentation. |
+| `/ux-design-review` | `@designer` | Reviews UI consistency and UX flows. |
+| `/backend-review` | `@backend` | Reviews server-side code and API standards. |
+| `/frontend-review` | `@frontend` | Reviews UI implementation and state management. |
+| `/db-optimization` | `@db` | Reviews schema design and optimizes queries. |
+| `/devops-check` | `@devops` | Verifies CI/CD, Docker, and infrastructure. |
+| `/maintenance-check` | `@maintenance` | Refactors debt and manages dependencies. |
+| `/full-review` | `Talos` | Runs a comprehensive, multi-role project audit. |
 
 ---
 
