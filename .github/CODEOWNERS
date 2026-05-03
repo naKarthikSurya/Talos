@@ -1,0 +1,8 @@
+* @naKarthikSurya
+
+.github/workflows/* @naKarthikSurya
+.github/dependabot.yml @naKarthikSurya
+package.json @naKarthikSurya
+package-lock.json @naKarthikSurya
+bin/* @naKarthikSurya
+src/* @naKarthikSurya

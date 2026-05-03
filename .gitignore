@@ -1,4 +1,59 @@
+# Dependencies
 node_modules/
-test-project/
+
+# npm / package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local package output
+*.tgz
 talos-ai-*.tgz
+nakarthiksurya-talos-*.tgz
+
+# Local test/scratch projects
+test-project/
+tmp/
+.temp/
+.cache/
+
+# TypeScript / coverage
+*.tsbuildinfo
+coverage/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Private keys and certificates
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.jks
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+# Cloud/service credentials
+service-account*.json
+google-credentials*.json
+firebase-adminsdk*.json
+aws-credentials*
+.aws/
+.gcp/
+.azure/
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# Editor files
+.idea/
+.vscode/*
+!.vscode/extensions.json

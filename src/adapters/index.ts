@@ -1,12 +1,12 @@
-export type Target = 
-  | 'antigravity' 
-  | 'claude' 
-  | 'codex' 
-  | 'gemini' 
-  | 'cursor' 
-  | 'cline' 
-  | 'aider' 
-  | 'windsurf' 
+export type Target =
+  | 'antigravity'
+  | 'claude'
+  | 'codex'
+  | 'gemini'
+  | 'cursor'
+  | 'cline'
+  | 'aider'
+  | 'windsurf'
   | 'all';
 
 export interface TalosContext {
@@ -48,4 +48,3 @@ export const allAdapters: Adapter[] = [
   windsurfAdapter,
   antigravityAdapter
 ];
-
