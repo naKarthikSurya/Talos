@@ -4,7 +4,7 @@
   "description": "Universal AI coding agent workspace protocol for Claude Code, Codex, Gemini CLI, Cursor, Cline, Aider, and Antigravity.",
   "type": "module",
   "bin": {
-    "talos": "./bin/cli.js"
+    "talos": "bin/cli.js"
   },
   "files": [
     "bin/",
@@ -18,7 +18,8 @@
   "scripts": {
     "build": "tsc",
     "prepack": "npm run build",
-    "test": "node --check bin/cli.js && npm pack --dry-run",
+    "test": "node --check bin/cli.js && node --check dist/cli/index.js",
+    "pack:check": "npm pack --dry-run",
     "sync": "node bin/cli.js sync"
   },
   "repository": {
