@@ -1,4 +1,4 @@
-<!-- TALOS_PROTOCOL_ACTIVE: ALWAYS_FOLLOW .cursorrules AND ai-control/state.md -->
+<!-- TALOS_PROTOCOL_ACTIVE: ALWAYS_FOLLOW .cursorrules AND talos-control/state.yaml -->
 # Talos
 
 **Talos** is an autonomous, role-based AI engineering engine built for Antigravity. It transforms raw requests into deterministic results through a governed lifecycle of Roles, Skills, and Artifacts.
@@ -27,8 +27,8 @@ npx talos init
 
 This will:
 
-1. **Auto-sync** `templates/` from the live `.agents/` and `ai-control/` in the package
-2. **Copy** `.agents/`, `ai-control/`, and `.cursorrules` into your current project
+1. **Auto-sync** `templates/` from the live `.agents/` and `talos-control/` in the package
+2. **Copy** `.agents/`, `talos-control/`, and `.cursorrules` into your current project
 3. **Add** all folders/files to `.git/info/exclude` to keep them out of version control
 4. **Automate**: The `.cursorrules` file automatically instructs any AI assistant to follow the squad protocol without manual setup.
 
@@ -40,11 +40,11 @@ Run the sync command inside the squad package to rebuild `templates/` automatica
 npx talos sync
 ```
 
-This deletes the old `templates/` contents and rebuilds them fresh from the current `.agents/` and `ai-control/`. No manual copying needed.
+This deletes the old `templates/` contents and rebuilds them fresh from the current `.agents/` and `talos-control/`. No manual copying needed.
 
 ### Configure your stack
 
-Open `ai-control/state.md` and update the `## Stack` section to match your project:
+Open `talos-control/state.yaml` and update the `## Stack` section to match your project:
 
 ```markdown
 frontend: nextjs      # react | nextjs | angular
@@ -59,7 +59,7 @@ Roles read this to automatically select the correct Skill (e.g. `nestjs-expert` 
 
 ```bash
 npm uninstall talos-ai --no-save
-rm -rf .agents ai-control
+rm -rf .agents talos-control
 ```
 
 ---
@@ -88,12 +88,12 @@ A task always moves forward through **stages**, each stage owned by a **Role**, 
   rules/        # 11 Role-specific rule files — enforced constraints
   workflows/    # 12 Role-specific workflow files — phased procedures
 
-ai-control/
-  state.md      # Current task state, stage, stack config, and artifact status
+talos-control/
+  state.yaml      # Current task state, stage, stack config, and artifact status
 
 templates/      # Scaffold source — auto-managed by the CLI
                 # Rebuilt automatically on every `init` and `sync` run
-                # Never edit manually — always edit .agents/ and ai-control/ directly
+                # Never edit manually — always edit .agents/ and talos-control/ directly
 ```
 
 ---
@@ -306,7 +306,7 @@ The `devops-cloud-engineer` role activates:
 
 ## Updating Task State
 
-The `ai-control/state.md` file tracks the current stage and artifact status. Update it manually or ask Antigravity to update it as stages complete.
+The `talos-control/state.yaml` file tracks the current stage and artifact status. Update it manually or ask Antigravity to update it as stages complete.
 
 ```markdown
 <!-- TALOS_PROTOCOL_ACTIVE: ALWAYS_FOLLOW THE CURRENT STAGE IN THIS FILE -->
@@ -325,11 +325,11 @@ Advance the stage by updating `Current Stage` after each artifact is approved.
 
 ## Git Management
 
-`.agents/` and `ai-control/` are local-only AI context. Add them to `.git/info/exclude` to keep them out of project history:
+`.agents/` and `talos-control/` are local-only AI context. Add them to `.git/info/exclude` to keep them out of project history:
 
 ```bash
 echo ".agents/" >> .git/info/exclude
-echo "ai-control/" >> .git/info/exclude
+echo "talos-control/" >> .git/info/exclude
 ```
 
 This keeps your repository clean while preserving full AI workflow context locally.
@@ -338,7 +338,7 @@ This keeps your repository clean while preserving full AI workflow context local
 
 ## Stack Selection Reference
 
-The `frontend-developer` and `backend-developer` roles select a framework skill based on your stack. Define your stack in `ai-control/state.md`:
+The `frontend-developer` and `backend-developer` roles select a framework skill based on your stack. Define your stack in `talos-control/state.yaml`:
 
 ```markdown
 Stack:

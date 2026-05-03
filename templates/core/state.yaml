@@ -1,0 +1,51 @@
+# TALOS_PROTOCOL_ACTIVE: ALWAYS_FOLLOW THE CURRENT STAGE IN THIS FILE
+
+task:
+  id: TASK-001
+  description: Build or change feature X
+
+stage:
+  current: PM_ANALYSIS_PENDING
+  active_role: NONE
+
+stack:
+  frontend: react        # react | nextjs | angular
+  backend: nestjs        # nestjs | fastapi | django
+  database: postgresql   # postgresql | mongodb | redis
+  cloud: aws             # aws | gcp | azure | none
+
+artifacts:
+  feature:
+    type: other
+    status: PENDING
+    request_feedback: true
+  solution:
+    type: implementation_plan
+    status: PENDING
+    request_feedback: true
+  implementation_steps:
+    type: task
+    status: PENDING
+    request_feedback: false
+  pm_view:
+    type: other
+    status: PENDING
+    request_feedback: false
+  full_implementation:
+    type: walkthrough
+    status: PENDING
+    request_feedback: false
+  test_strategy:
+    type: other
+    status: PENDING
+    request_feedback: false
+  security_review:
+    type: other
+    status: PENDING
+    request_feedback: false
+  backend_contract:
+    type: other
+    status: PENDING
+    request_feedback: false
+
+execution_log: []

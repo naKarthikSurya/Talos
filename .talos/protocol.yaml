@@ -1,0 +1,44 @@
+name: Talos
+version: 1
+
+core:
+  stateFile: .talos/state.yaml
+  taskFile: .talos/task.md
+
+roles:
+  - id: product-manager
+    file: .talos/roles/product-manager.md
+  - id: system-architect
+    file: .talos/roles/system-architect.md
+  - id: backend-engineer
+    file: .talos/roles/backend-engineer.md
+  - id: frontend-engineer
+    file: .talos/roles/frontend-engineer.md
+  - id: qa-engineer
+    file: .talos/roles/qa-engineer.md
+  - id: devops-engineer
+    file: .talos/roles/devops-engineer.md
+  - id: security-engineer
+    file: .talos/roles/security-engineer.md
+
+workflow:
+  default: full-cycle
+  stages:
+    - pm-analysis
+    - architecture
+    - implementation-plan
+    - backend
+    - frontend
+    - database
+    - qa
+    - security
+    - devops
+    - final-review
+
+safety:
+  requireApprovalFor:
+    - deleting_files
+    - modifying_env
+    - installing_dependencies
+    - running_destructive_commands
+    - changing_auth_or_security_code
