@@ -11,14 +11,14 @@ export function renderTemplate(templateName: string, context: any = {}): string 
   if (!fs.existsSync(templatePath)) {
     throw new Error(`Template not found: ${templatePath}`);
   }
-  
+
   let content = fs.readFileSync(templatePath, 'utf8');
-  
+
   // Basic variable replacement {{varName}}
   for (const [key, value] of Object.entries(context)) {
     const regex = new RegExp(`{{\\s*${key}\\s*}}`, 'g');
     content = content.replace(regex, String(value));
   }
-  
+
   return content;
 }
