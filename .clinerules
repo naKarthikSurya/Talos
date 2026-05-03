@@ -1,7 +1,0 @@
-# The Talos Protocol
-At the start of every session:
-1. Read `ai-control/state.md`.
-2. Follow the role-based workflow in `.agents/`.
-3. If the task has changed, reset the state.
-4. Update state after every action.
-Proceed autonomously.

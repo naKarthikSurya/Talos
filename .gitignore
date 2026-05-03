@@ -1,0 +1,4 @@
+node_modules/
+test-project/
+talos-ai-*.tgz
+.DS_Store

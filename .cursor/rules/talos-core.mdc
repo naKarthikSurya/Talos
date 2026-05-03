@@ -1,0 +1,17 @@
+---
+description: Talos AI engineering workflow rules
+alwaysApply: true
+---
+
+# The Talos Protocol
+
+You are operating within a deterministic, role-based AI engineering engine.
+At the start of EVERY turn, you MUST:
+
+1. **Sync State**: Read `.talos/state.yaml` to identify the current stage and active role.
+2. **Follow Task**: Read `.talos/task.md` for your active task.
+3. **Adopt Persona**: Read `.talos/roles/` for the current stage.
+4. **Execute Workflow**: Follow the specific workflow file in `.talos/workflows/`.
+5. **Mandatory Sync**: Update `.talos/state.yaml` and `.talos/task.md` as you make progress.
+
+Do NOT wait for manual slash commands or explicit role mentions. Proceed autonomously through the stages defined in the state.

@@ -1,26 +1,51 @@
 {
-  "name": "talos-ai",
-  "version": "1.0.5",
-  "description": "Talos: The autonomous AI engineering engine for Antigravity.",
-  "main": "index.js",
+  "name": "@nakarthiksurya/talos",
+  "version": "1.0.7",
+  "description": "Universal AI coding agent workspace protocol for Claude Code, Codex, Gemini CLI, Cursor, Cline, Aider, and Antigravity.",
+  "type": "module",
   "bin": {
     "talos": "./bin/cli.js"
   },
+  "files": [
+    "bin/",
+    "dist/",
+    "src/",
+    "templates/",
+    ".talos/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "prepack": "npm run build",
+    "test": "node --check bin/cli.js && npm pack --dry-run",
     "sync": "node bin/cli.js sync"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/naKarthikSurya/Talos.git"
+    "url": "git+https://github.com/naKarthikSurya/Talos.git"
   },
+  "bugs": {
+    "url": "https://github.com/naKarthikSurya/Talos/issues"
+  },
+  "homepage": "https://github.com/naKarthikSurya/Talos#readme",
   "keywords": [
+    "ai",
+    "agents",
+    "cli",
+    "codex",
+    "claude-code",
+    "gemini-cli",
+    "cursor",
+    "cline",
     "antigravity",
-    "ai-agents",
-    "talos-ai",
-    "workflow-automation",
-    "role-based-agents"
+    "developer-tools"
   ],
   "author": "Karthik Surya",
-  "license": "UNLICENSED"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  }
 }
