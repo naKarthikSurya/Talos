@@ -5,12 +5,12 @@ import { Target } from '../adapters/index.js';
 export async function detectCommand() {
   console.log('Detecting optimal Talos targets...\n');
   const projectRoot = process.cwd();
-  
+
   console.log('Detected:');
-  
+
   const hasPkg = fs.existsSync(path.join(projectRoot, 'package.json'));
   if (hasPkg) console.log('✓ package.json');
-  
+
   const hasGit = fs.existsSync(path.join(projectRoot, '.git'));
   if (hasGit) console.log('✓ .git');
 

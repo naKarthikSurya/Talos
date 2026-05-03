@@ -30,7 +30,7 @@ export async function initCommand(args: string[]) {
   // 1. Copy the core protocol templates to `.talos/`
   const srcCore = path.join(packageRoot, 'templates', 'core');
   const destCore = path.join(context.projectRoot, '.talos');
-  
+
   if (!fs.existsSync(destCore)) {
     console.log('  Creating .talos/ directory...');
     fs.cpSync(srcCore, destCore, { recursive: true });
@@ -64,7 +64,7 @@ export async function initCommand(args: string[]) {
   for (const output of pendingOutputs.values()) {
     const outPath = path.join(context.projectRoot, output.path);
     const outDir = path.dirname(outPath);
-    
+
     if (!fs.existsSync(outDir)) {
       fs.mkdirSync(outDir, { recursive: true });
     }

@@ -2,26 +2,48 @@ name: Talos CLI Test
 
 on:
   push:
+    branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:
+    name: Test (${{ matrix.os }}, Node ${{ matrix.node }})
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         node: [20, 22]
+
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+          cache: npm
 
-      - run: npm install
-      - run: npm run build
-      - run: node --check bin/cli.js
-      - run: npm pack --dry-run
-      - run: npm link
-      - run: talos init --target all
-      - run: talos doctor
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Run package checks
+        run: npm test
+
+      - name: Link Talos CLI
+        run: npm link
+
+      - name: Test Talos init
+        run: talos init --target all
+
+      - name: Run Talos doctor
+        run: talos doctor
