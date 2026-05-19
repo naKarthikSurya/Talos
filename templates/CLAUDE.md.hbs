@@ -18,3 +18,16 @@ You are operating inside a Talos-governed coding workspace using Claude Code.
 - Workflows: @.talos/workflows/
 
 Before starting work, read `@.talos/state.yaml` and `@.talos/task.md`.
+
+## IDE vs. Terminal Environment Protocol
+- **Terminal/CLI Environment:** Since you are operating via Claude Code in a terminal, you may output standard terminal
+and chat responses. However, always update the core files (like `@.talos/state.yaml` and `@.talos/task.md`) to keep the
+workspace state synchronized.
+- **IDE Environment:** If you are operating inside a visual IDE (e.g. Cursor, Cline, Windsurf, Gemini Code Assist,
+etc.), you MUST follow the **IDE Artifact Protocol**: always create or update structured markdown Artifacts (using
+standard headers, alert tags, mermaid diagrams, etc.) for each phase/state of the task instead of outputting long chat
+responses. Use these artifacts to document:
+- Requirements & Planning (e.g. `feature.md`, `solution.md`)
+- Task checklists & Progress tracking (e.g. `task.md`, `implementation_steps.md`)
+- Explanations & Technical walkthroughs (e.g. `walkthrough.md`, `full_implementation.md`)
+- Local or session-specific states
