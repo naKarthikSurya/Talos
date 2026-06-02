@@ -9,10 +9,10 @@ stage:
   active_role: NONE
 
 stack:
-  frontend: react        # react | nextjs | angular
-  backend: nestjs        # nestjs | fastapi | django
-  database: postgresql   # postgresql | mongodb | redis
-  cloud: aws             # aws | gcp | azure | none
+  frontend: react # react | nextjs | angular
+  backend: nestjs # nestjs | fastapi | django
+  database: postgresql # postgresql | mongodb | redis
+  cloud: aws # aws | gcp | azure | none
 
 artifacts:
   feature:
