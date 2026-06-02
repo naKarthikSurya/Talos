@@ -78,6 +78,32 @@ export async function initCommand(args: string[]) {
     console.log(`  ✓ Generated ${output.path}`);
   }
 
+  // 3. Automatically add local agent directories to Git local exclude
+  const gitDir = path.join(context.projectRoot, '.git');
+  if (fs.existsSync(gitDir)) {
+    const excludePath = path.join(gitDir, 'info', 'exclude');
+    const excludeDir = path.dirname(excludePath);
+
+    if (!fs.existsSync(excludeDir)) {
+      fs.mkdirSync(excludeDir, { recursive: true });
+    }
+
+    const localExcludes = ['.agent/', '.gemini/'];
+    let existingContent = '';
+    if (fs.existsSync(excludePath)) {
+      existingContent = fs.readFileSync(excludePath, 'utf8');
+    }
+
+    const toAdd = localExcludes.filter(item => !existingContent.includes(item));
+    if (toAdd.length > 0) {
+      console.log('  Adding local agent exclusions to .git/info/exclude...');
+      const appendStr = (existingContent.endsWith('\n') || existingContent === '' ? '' : '\n') +
+        '\n# Talos Local AI Agent state\n' +
+        toAdd.join('\n') + '\n';
+      fs.appendFileSync(excludePath, appendStr);
+    }
+  }
+
   console.log('\n✅ Talos initialized successfully!');
   console.log('Next: Update .talos/state.yaml with your project stack and task description.');
 }
